@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Enter Number"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        />
+
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Number"
+        android:inputType="number"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check"
+        android:layout_marginTop="120dp"/>
+
+</LinearLayout>
+
+
+
+package com.example.palindromenumber;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+public class MainActivity extends AppCompatActivity {
+    TextView textView;
+    EditText input;
+    Button button;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        textView=findViewById(R.id.TextView);
+        input=findViewById(R.id.editTextTextPersonName);
+        button=findViewById(R.id.button);
+        button.setOnClickListener(view -> {
+            if (!input.getText().toString().equals(""))
+            {
+                int Inpute= Integer.parseInt(input.getText().toString());
+                isPalindrome(Inpute);
+            }
+            else{
+                Toast.makeText(getApplicationContext(),"Please enter input",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void isPalindrome(int s) {
+        int r,sum=0,temp;
+        temp=s;
+        while(s>0){
+            r=s%10;
+            sum=(sum*10)+r;
+            s=s/10;
+        }
+        if (temp==sum){
+            Toast.makeText(getApplicationContext(),"Given number is Palidrome",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"Given number is Not Palidrome",Toast.LENGTH_SHORT).show();
+        }
+    }
+}
